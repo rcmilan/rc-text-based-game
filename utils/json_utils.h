@@ -3,6 +3,7 @@
 
 #include <string>
 
+std::string getFileContent(const std::string &index);
 std::string getFileContent(const std::string& index, const std::string& culture);
 
 #endif // JSON_UTILS_H

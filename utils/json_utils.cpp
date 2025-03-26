@@ -4,9 +4,14 @@
 #include <sstream>
 #include <windows.h> // Necessário para forçar UTF-8 no Windows
 
+std::string getFileContent(const std::string &index)
+{
+    return getFileContent(index, "pt-BR");
+}
+
 std::string getFileContent(const std::string &index, const std::string &culture)
 {
-    std::string paths[] = {"dialog/index.json"}; // Caminho do JSON
+    std::string paths[] = {"dialog/index.json"};
     std::ifstream file;
 
     // Tentar abrir o JSON em um dos caminhos definidos com modo binário para evitar problemas de BOM
@@ -20,7 +25,7 @@ std::string getFileContent(const std::string &index, const std::string &culture)
     if (!file)
     {
         std::cerr << "Erro: Arquivo JSON não encontrado." << std::endl;
-        return index; // Retorna a própria index se o arquivo não for encontrado
+        return index;
     }
 
     std::stringstream buffer;
@@ -37,12 +42,12 @@ std::string getFileContent(const std::string &index, const std::string &culture)
     // Procurar a chave do índice no JSON
     size_t indexPos = json.find("\"" + index + "\"");
     if (indexPos == std::string::npos)
-        return index; // Retorna o índice se não encontrar a chave
+        return index;
 
     // Procurar o idioma dentro da chave encontrada
     size_t langPos = json.find("\"" + culture + "\"", indexPos);
     if (langPos == std::string::npos)
-        return index; // Retorna o índice se o idioma não existir
+        return index;
 
     // Extrair o texto
     size_t start = json.find(":", langPos);
@@ -51,8 +56,8 @@ std::string getFileContent(const std::string &index, const std::string &culture)
         end = json.find("}", start);
 
     if (start == std::string::npos || end == std::string::npos)
-        return index; // Retorna índice em caso de erro
+        return index;
 
-    std::string text = json.substr(start + 2, end - start - 3); // Remove aspas extras
-    return text.empty() ? index : text;                         // Retorna index se o texto estiver vazio
+    std::string text = json.substr(start + 2, end - start - 3);
+    return text.empty() ? index : text;
 }

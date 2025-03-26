@@ -7,7 +7,7 @@ int main()
     // Configurar saída do console para UTF-8
     SetConsoleOutputCP(CP_UTF8);
 
-    std::string lang = "pt";
-    std::cout << getFileContent("begin", lang) << std::endl;
+    std::cout << getFileContent("begin") << std::endl;
+    
     return 0;
 }
