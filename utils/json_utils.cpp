@@ -4,6 +4,11 @@
 #include <sstream>
 #include <windows.h> // Necessário para forçar UTF-8 no Windows
 
+std::string getFileContent(const std::string &index)
+{
+    return getFileContent(index, "pt-BR"); // Chama a função com o idioma padrão
+}
+
 std::string getFileContent(const std::string &index, const std::string &culture)
 {
     std::string paths[] = {"dialog/index.json"}; // Caminho do JSON
