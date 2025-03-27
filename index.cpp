@@ -1,17 +1,21 @@
 #include <iostream>
-#include <windows.h> // Necessário para configurar o console no Windows
-#include "scenes/start_scene.cpp" // Inclui a StartScene
+#include <windows.h>
+#include "game.h"
+#include "scenes/start_scene.cpp"
 
 int main()
 {
     // Configurar saída do console para UTF-8
     SetConsoleOutputCP(CP_UTF8);
 
-    // Instanciar e usar a StartScene
-    StartScene startScene;
-    startScene.initialize();
-    startScene.render();
-    startScene.update();
+    // Criar o jogo
+    Game game;
+
+    // Configurar a cena inicial
+    game.setActiveScene(std::make_unique<StartScene>(&game));
+
+    // Executar o game loop
+    game.run();
 
     return 0;
 }

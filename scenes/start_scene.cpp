@@ -1,34 +1,47 @@
-#include "scene.cpp"
+#include "scene.h"
+#include "../game.h"
 #include <iostream>
 
 class StartScene : public Scene
 {
+private:
+    bool isComplete;
+
 public:
-    StartScene() : Scene("StartScene") {}
+    StartScene(Game* gameInstance) : Scene("StartScene", gameInstance), isComplete(false) {}
 
     void initialize() override
     {
         print("Bem-vindo ao jogo!", ConsoleColor::GREEN);
         print("Digite seu nome:", ConsoleColor::CYAN);
-    
+
         std::string nome = getInput<std::string>("Seu nome: ", ConsoleColor::YELLOW);
-        print("Olá, " + nome + "!", ConsoleColor::MAGENTA);    
+        print("Olá, " + nome + "!", ConsoleColor::MAGENTA);
     }
 
     void update() override
     {
-        // Aguarda o jogador pressionar Enter
-        if (std::cin.get() == '\n')
+        print("Pressione Enter para continuar ou digite 'sair' para encerrar o jogo...", ConsoleColor::WHITE);
+        std::string input;
+        std::getline(std::cin, input);
+
+        if (input == "sair")
         {
-            std::cout << "Iniciando o jogo..." << std::endl;
+            game->exitGame(); // Encerra o jogo
+        }
+        else
+        {
+            isComplete = true; // Marca a cena como concluída
         }
     }
 
     void render() override
     {
-        // Renderiza elementos visuais da tela inicial (se necessário)
-        std::cout << "Renderizando a tela inicial..." << std::endl;
+        print("Renderizando a tela inicial...", ConsoleColor::BLUE);
     }
 
-    ~StartScene() override {}
+    bool completed() const
+    {
+        return isComplete;
+    }
 };
