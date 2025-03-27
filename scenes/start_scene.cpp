@@ -1,5 +1,4 @@
 #include "scene.h"
-#include "../game.h"
 #include <iostream>
 
 class StartScene : public Scene

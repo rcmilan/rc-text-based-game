@@ -3,6 +3,7 @@
 
 #include <string>
 #include "../utils/console_utils.h"
+#include "../core/game.h"
 
 class Game; // Forward declaration
 
