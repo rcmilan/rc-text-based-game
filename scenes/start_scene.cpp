@@ -8,8 +8,11 @@ public:
 
     void initialize() override
     {
-        std::cout << "Bem-vindo ao jogo!" << std::endl;
-        std::cout << "Pressione Enter para começar..." << std::endl;
+        print("Bem-vindo ao jogo!", ConsoleColor::GREEN);
+        print("Digite seu nome:", ConsoleColor::CYAN);
+    
+        std::string nome = getInput<std::string>("Seu nome: ", ConsoleColor::YELLOW);
+        print("Olá, " + nome + "!", ConsoleColor::MAGENTA);    
     }
 
     void update() override

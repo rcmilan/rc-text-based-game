@@ -1,4 +1,5 @@
 #include <string>
+#include "../utils/console_utils.h"
 
 class Scene
 {
