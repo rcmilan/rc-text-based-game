@@ -20,17 +20,15 @@ public:
 
     void update() override
     {
-        print("Pressione Enter para continuar ou digite 'sair' para encerrar o jogo...", ConsoleColor::WHITE);
-        std::string input;
-        std::getline(std::cin, input);
+        std::string input = getInput<std::string>("Pressione Enter para continuar ou digite 'sair' para encerrar o jogo...", ConsoleColor::YELLOW);
 
         if (input == "sair")
         {
-            game->exitGame(); // Encerra o jogo
+            game->exitGame();
         }
         else
         {
-            isComplete = true; // Marca a cena como concluída
+            isComplete = true;
         }
     }
 

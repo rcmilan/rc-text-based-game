@@ -18,8 +18,6 @@ void Game::run()
         {
             activeScene->initialize();
             activeScene->render();
-
-            // Aguarda input do jogador e atualiza a cena
             activeScene->update();
         }
         else
